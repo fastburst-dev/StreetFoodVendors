@@ -122,25 +122,5 @@ namespace StreetFoodVendors.Util
                 false
             );
         }
-
-        // ---------------------------------------------------------
-        // GET CURRENT ANIMATION TIME
-        // ---------------------------------------------------------
-        public static double GetEntityAnimCurrentTime(this Ped ped, string animDict, string animName)
-        {
-            return Function.Call<float>(Hash.GET_ENTITY_ANIM_CURRENT_TIME,
-                ped,
-                animDict,
-                animName
-            );
-        }
-
-        // ---------------------------------------------------------
-        // RANDOM INT
-        // ---------------------------------------------------------
-        public static int GetRandomIntInRange(int min, int max)
-        {
-            return new Random().Next(min, max + 1);
-        }
     }
 }

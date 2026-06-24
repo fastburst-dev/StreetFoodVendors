@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using GTA;
+﻿using GTA;
 using GTA.Math;
 using GTA.Native;
 using StreetFoodVendors.Util;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace StreetFoodVendors
 {
@@ -66,14 +67,22 @@ namespace StreetFoodVendors
         };
 
         private readonly Dictionary<StandKey, Ped> StandVendors = new Dictionary<StandKey, Ped>();
-
         private bool initializedCleanup = false;
         private Prop FoodProp;
+        private static string ScriptVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+        public void ShowLoadedNotification()
+        {
+            GTA.UI.Notification.PostTicker($"~b~Street Food Vendors Enhanced v{ScriptVersion}~w~ is loaded.", true);
+        }
 
         public Main()
         {
             Tick += OnTick;
             Interval = 1;
+
+            // Build version notification
+            ShowLoadedNotification();
 
             this.Aborted += OnScriptAbort;
         }
@@ -223,7 +232,10 @@ namespace StreetFoodVendors
                     Utils.DisplayHelpTextThisFrame(MsgHamburger);
 
                 if (!Game.IsControlJustPressed(Control.Context))
+                {
+                    ped.PlaySpeech("GENERIC_HI");
                     continue;
+                }
 
                 if (Game.Player.WantedLevel > 0)
                 {
@@ -243,6 +255,7 @@ namespace StreetFoodVendors
 
                 Function.Call(Hash.REQUEST_ANIM_DICT, "gestures@m@standing@casual");
                 Function.Call(Hash.REQUEST_ANIM_DICT, "mp_player_inteat@burger");
+                Function.Call(Hash.REQUEST_ANIM_DICT, "misscarsteal4@vendor");
 
                 while (!Function.Call<bool>(Hash.HAS_ANIM_DICT_LOADED, "gestures@m@standing@casual"))
                     Script.Wait(0);
@@ -250,10 +263,11 @@ namespace StreetFoodVendors
                 while (!Function.Call<bool>(Hash.HAS_ANIM_DICT_LOADED, "mp_player_inteat@burger"))
                     Script.Wait(0);
 
+                while (!Function.Call<bool>(Hash.HAS_ANIM_DICT_LOADED, "misscarsteal4@vendor"))
+                    Script.Wait(0);
+
                 player.TaskPlayAnim("gestures@m@standing@casual", "gesture_you_soft", -1);
-
                 Script.Wait(1000);
-
                 Function.Call(Hash.STOP_ANIM_TASK,
                     player,
                     "gestures@m@standing@casual",
@@ -261,10 +275,12 @@ namespace StreetFoodVendors
                     1.0f);
 
                 Game.Player.Money -= price;
+                ped.TaskPlayAnimLoop("misscarsteal4@vendor", "base", 0);
                 ped.PlaySpeech("GENERIC_BYE");
 
-                string foodModel = nearHotdogStand ? "prop_cs_hotdog_01" : "prop_cs_burger_01";
+                Script.Wait(1500);
 
+                string foodModel = nearHotdogStand ? "prop_cs_hotdog_01" : "prop_cs_burger_01";
                 FoodProp = World.CreateProp(foodModel, player.Position, true, true);
                 if (FoodProp.Exists())
                 {
@@ -277,19 +293,17 @@ namespace StreetFoodVendors
                         true, true, false, false, 2, true
                     );
                 }
-
-                player.TaskPlayAnim("mp_player_inteat@burger", "mp_player_int_eat_burger", -1);
-                player.PlaySpeech("GENERIC_EAT");
+                player.TaskPlayAnimUpperBody("mp_player_inteat@burger", "mp_player_int_eat_burger", 4500, false);
                 player.Health += 5;
-
                 Script.Wait(2000);
-
                 Function.Call(Hash.STOP_ANIM_TASK,
                     player,
                     "mp_player_inteat@burger",
                     "mp_player_int_eat_burger",
                     1.0f);
 
+                player.PlaySpeech("GENERIC_EAT");
+                
                 if (FoodProp.Exists())
                     FoodProp.Delete();
                 GTA.UI.Notification.PostTicker("~y~ Health increased by 5%", true);
