@@ -171,7 +171,13 @@ namespace StreetFoodVendors
                         vendor.Delete();
 
                     // Correct spawn position: behind the stand
-                    Vector3 spawnPos = stand.Position + stand.ForwardVector * 1.0f;
+                    Vector3 forward = stand.ForwardVector;
+
+                    if (forward == null || forward.Length() < 0.1f)
+                        forward = stand.Quaternion * Vector3.RelativeFront; // fallback
+
+                    Vector3 spawnPos = stand.Position + forward * 1.0f;
+
                     float heading = stand.Heading + 180f;
 
                     Ped newVendor = World.CreatePed(VendorModel, spawnPos);
