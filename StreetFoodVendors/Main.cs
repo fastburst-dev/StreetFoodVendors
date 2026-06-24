@@ -287,7 +287,7 @@ namespace StreetFoodVendors
                     Function.Call(Hash.ATTACH_ENTITY_TO_ENTITY,
                         FoodProp.Handle,
                         player.Handle,
-                        player.Bones[Bone.SkelLeftFinger12].Index,
+                        player.Bones[Bone.PHLeftHand].Index,
                         0.0f, 0.0f, 0.0f,
                         0.0f, 0.0f, 0.0f,
                         true, true, false, false, 2, true
