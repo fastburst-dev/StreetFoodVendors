@@ -34,6 +34,9 @@ v1.0.1.5
 v1.0.1.6
 * Fixed eating animation
 
+v1.0.1.7
+* Fixed null exception check
+
 ⭐ CREDITS
 Created by FastBurst
 GTA V Mod Developer & Systems Architect
