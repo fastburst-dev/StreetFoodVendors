@@ -1,7 +1,7 @@
 <img width="2048" height="1080" alt="banner1" src="https://github.com/user-attachments/assets/3367fc16-67a6-4501-bbd3-4e53c64ea785" />
 # Street Food Vendors Enhanced
-###⭐ Working Hotdog & Burger Vendors
-🍔🌭 Buy street food like it’s 2008 again
+# ⭐ Working Hotdog & Burger Vendors
+# 🍔🌭 Buy street food like it’s 2008 again
 
 # 🍔 About the Mod
 Remember grabbing a hotdog or a burger in GTA IV after a shootout?
