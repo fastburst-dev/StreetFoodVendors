@@ -1,4 +1,4 @@
-Street Food Vendors Enhanced
+Street Food Vendors Enhanced 1.2.0.1-Enhanced
 
 ⭐ Working Hotdog & Burger Vendors
 🍔🌭 Buy street food like it’s 2008 again
@@ -8,6 +8,7 @@ Remember grabbing a hotdog or a burger in GTA IV after a shootout?
 Rockstar almost brought that back in GTA V — the animations, voice lines, and even vendor behavior are still buried in the game files. Street Food Vendors Enhanced, is specially made for GTAV Enhanced.
 
 This mod restores that cut feature and expands it:
+* 🍔🌭 Buy various other food & drink items from each vendor ranging from Alcohol to Sandwiches Tacos and more!
 * 🌭 Buy hotdogs for $5
 * 🍔 Buy burgers for $7
 * ❤️ Each one heals you a bit
@@ -20,7 +21,9 @@ It feels like a feature Rockstar forgot to finish — now it finally works.
 📥 Installation
 1. Drop StreetFoodVendors.dll into your scripts folder
 2. Requires Script Hook V + Script Hook V .NET
-3. Load the game and enjoy some good old‑fashioned street meat
+3. Requires LemonUI SHNDN3 included in package
+4. Legacy Install requires Script Hook V .NET Nightly
+5. Load the game and enjoy some good old‑fashioned street meat
 
 🎮 Controls
 👉 Press E (keyboard)
@@ -36,6 +39,12 @@ v1.0.1.6
 
 v1.0.1.7
 * Fixed null exception check
+
+v1.2.0.1
+* Complete re-write of script
+* Added LemonUI Menu Shop unique to both vendor types
+* Added better animations and eating animations
+* Fixed spawning and non-spawning of vendors for both stand types
 
 ⭐ CREDITS
 Created by FastBurst
